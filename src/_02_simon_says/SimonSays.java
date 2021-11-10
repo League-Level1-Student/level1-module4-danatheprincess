@@ -45,37 +45,47 @@ public class SimonSays extends KeyAdapter {
 		JOptionPane.showMessageDialog(null, "Press the maching key when 'Simon says' otherwise press a different key");
 
 		// 4. Call the showImage method to show an image
-		
+		showImage();
 
 	}
-
+int points=0;
 	public void keyPressed(KeyEvent e) {
 		// 15. Make a points variable to track the score.
-		
+	int keyCode=e.getKeyCode();	
 		// 16. If the keyCode matches the imageIndex and "Simon says"
 
 		// 17. Increase the value of score
-
+if(keyCode==imageIndex&&simonSays) {
+	points+=1;
+	speak ("You are CORRECT!!!");
+}
 		// 18. Use the speak method to tell the user they were correct
-		JOptionPane.showMessageDialog(null, "You are CORRECT!!!");
+		
 		// 19. If the keyCode doesn't match the imageIndex and "Simon didn't
 		// say..."
-		if()
+if(keyCode!=imageIndex&&!simonSays) {
+	points+=1;
+	speak ("You are CORRECT!!!");
+}
 		// 20. Increase the value of score
 
 		// 21. Use the speak method to tell the user they were correct
 
 		// 22. Increment tries by 1
-
+tries+=1;
 		// 25. If tries is greater than 9 (or however many you want)...
-
+if(tries>9) {
+	System.out.println("you score "+points+" out of "+tries);
+	System.exit(0);
+}
 		// 26. Tell the user their score
 
 		// 27. Exit the program
 
 		// 23. Dispose of the frame
-
+frame.dispose();
 		// 24. Call the showImage method to show a new image
+showImage();
 	}
 
 	private void showImage() {
@@ -104,7 +114,11 @@ public class SimonSays extends KeyAdapter {
 		// 13. Use the Random and the speak method to either say
 		// "Simon says press this key" or "Press this key"
 	    simonSays=ran.nextBoolean();
-	    
+	    if(simonSays) {
+	    	speak("Simon says press this key");
+	    }else{
+	    	speak("Press this key");
+	    }
 		// 14. Above, set the value of simonSays to true/false appropriately
 	    
 	}
@@ -121,22 +135,22 @@ public class SimonSays extends KeyAdapter {
 	}
 
 	static void speak(String words) {
-		
-		if (System.getProperty("os.name").contains("Windows")) {
-			String cmd = "PowerShell -Command \"Add-Type -AssemblyName System.Speech; (New-Object System.Speech.Synthesis.SpeechSynthesizer).Speak('"
-					+ words + "');\"";
-			try {
-				Runtime.getRuntime().exec(cmd).waitFor();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else {
-			try {
-				Runtime.getRuntime().exec("say " + words).waitFor();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
+	System.out.println(words);	
+//		if (System.getProperty("os.name").contains("Windows")) {
+//			String cmd = "PowerShell -Command \"Add-Type -AssemblyName System.Speech; (New-Object System.Speech.Synthesis.SpeechSynthesizer).Speak('"
+//					+ words + "');\"";
+//			try {
+//				Runtime.getRuntime().exec(cmd).waitFor();
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		} else {
+//			try {
+//				Runtime.getRuntime().exec("say " + words).waitFor();
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		}
 	}
 
 }
