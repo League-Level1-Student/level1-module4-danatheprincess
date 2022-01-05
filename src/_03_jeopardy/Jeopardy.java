@@ -106,7 +106,7 @@ public class Jeopardy implements ActionListener {
 		// Set the text of the button to the dollarAmount
 		
 		// Increment the buttonCount (this should make the layout vertical)
-		dollarAmount+=100;
+		buttonCount++;
 		// Return your new button instead of the temporary button
 
 		return button;
@@ -120,14 +120,19 @@ public class Jeopardy implements ActionListener {
 		JButton buttonPressed = (JButton) e.getSource();
 		// If the buttonPressed was the firstButton
 		if(buttonPressed==firstButton) {
-			askQuestion("what was the name of the princess that had very long hair?", "Rapunzel", 100);
+			askQuestion("what was the name of the princess that had very long hair?", "Rapunzel", 200);
 		}
 			// Call the askQuestion() method
  
 		// Complete the code in the askQuestion() method. When you play the game, the score should change.
 
 		// If the buttonPressed was the secondButton
-
+		if(buttonPressed==secondButton) {
+			askQuestion("What was the name of the princess who lived with seven dwarfs?","Snow White", 400);
+		}
+		if(buttonPressed==thirdButton) {
+			askQuestion("What was the name of the princess that had to go live with 3 fairy godmothers?", "Aurora", 600);
+		}
 			// Call the askQuestion() method with a harder question
 
 		// Clear the text on the button that was pressed (set the button text to nothing)
@@ -139,24 +144,30 @@ public class Jeopardy implements ActionListener {
 		// Use the playJeopardyTheme() method to play music while the use thinks of an answer
 		
 		// Remove this temporary message and replace it with a pop-up that asks the user the question
-		JOptionPane.showMessageDialog(null, "this is where the question will be asked");
+		String answer=JOptionPane.showInputDialog(question);
 		
 		// Stop the theme music when they have entered their response. Hint: use the sound variable 
 		
 		// If the answer is correct
-
+		if(answer.equalsIgnoreCase(correctAnswer)) {
+			score+=prizeMoney;
+			JOptionPane.showMessageDialog(null, "CORRECT");
+		}
 			// Increase the score by the prizeMoney
 
 			// Pop up a message to tell the user they were correct
 
 		// Otherwise
-
+		else {
+			score-=prizeMoney;
+			JOptionPane.showMessageDialog(null, "INCORRECT, the correct answer is "+correctAnswer);
+		}
 			// Decrement the score by the prizeMoney
 
 			// Pop up a message to tell the user they were wrong and give them the correct answer
 
 		// Call the updateScore() method
-
+		updateScore();
 	}
 
 	public static synchronized void playJeopardyTheme()
