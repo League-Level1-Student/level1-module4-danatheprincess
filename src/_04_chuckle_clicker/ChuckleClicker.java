@@ -35,9 +35,11 @@ public ChuckleClicker(){
 @Override
 public void actionPerformed(ActionEvent arg0) {
 	// TODO Auto-generated method stub
-	//if(button==mousedPressed) {
+	if(arg0.getSource()==button) {
 		JOptionPane.showMessageDialog(null, "hi");
+	}
+	
 	}
 }
 
-}
+
